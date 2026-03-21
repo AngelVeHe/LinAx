@@ -37,7 +37,7 @@ private:
     
     Vector operator+(Vector<T> v)
     {
-        Vector(dim)
+        Vector(dim) w;
     }
 
 
