@@ -4,26 +4,43 @@
 
 #include <vector>
 #include <cinttypes>
+#include <string>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
 
-template <typename T> class Matrix
+template <class T> class Matrix
 {
 private:
     u_int64_t rows;
     u_int64_t cols;
     vector<T> data; 
 
-
-
+    
 
 
 public:
     Matrix(uint64_t r, uint64_t c); 
 
+    //Escritura
+    inline T& operator()(uint64_t r, uint64_t c) {return data[rows * c + r];}
+    inline const T& operator()(uint64_t r, uint64_t c) const {return data[rows * c + r];}
+    
+    friend ostream& operator<<(ostream& os, const Matrix<T>& M)
+    {
+        
+        for (uint64_t i = 0; i < M.rows; ++i) {
+            for (uint64_t j = 0; j < M.cols; ++j) {
+                os << M(i, j) << " ";
+            }
+            os << "\n";
+        }
+        return os;
+        }
 
-
+    
 };
 
 template <typename T> class Vector
@@ -35,13 +52,12 @@ private:
 private:
     Vector(uint64_t dim);
     
-    Vector operator+(Vector<T> v)
-    {
-        Vector(dim) w;
-    }
-
 
 };
+
+
+
+template<class T>  Matrix<T> readMatrix(const string& path);
 
 
 
